@@ -8,9 +8,9 @@ class EnviamentAdmin(admin.ModelAdmin):
     search_fields = ("email",)
 
 # els elements concrets mostraran nomes el codi d'arxiu
-admin.site.register(Cartell)
-admin.site.register(Narracio)
-admin.site.register(Poesia)
-admin.site.register(Assaig)
+admin.site.register(Cartell,EnviamentAdmin)
+admin.site.register(Narracio,EnviamentAdmin)
+admin.site.register(Poesia,EnviamentAdmin)
+admin.site.register(Assaig,EnviamentAdmin)
 # enviament (super-classe) mostrara dades del remitent
 admin.site.register(Enviament,EnviamentAdmin)
