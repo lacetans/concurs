@@ -2,6 +2,7 @@
 db.sqlite
 db.sqlite3
 uploads
+run.log
 
 # generic PYTHON
 *.py[cod]

@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import post_delete
+from django.dispatch.dispatcher import receiver
 import os
 
 # Create your models here.
@@ -18,6 +20,12 @@ class Enviament(models.Model):
     arxiu = models.FileField(upload_to=filebuilder)
     def __unicode__(self):
         return os.path.basename(self.arxiu.name)
+
+@receiver(post_delete, sender=Enviament)
+def enviament_esborra_arxiu(sender, instance, **kwargs):
+    #if instance.arxiu.isfile(instance.file.path):
+    #    os.remove(instance.arxiu.path)
+    instance.arxiu.delete(False)
 
 class Cartell(Enviament):
     pass

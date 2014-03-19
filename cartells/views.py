@@ -62,7 +62,7 @@ def index(request):
                 return HttpResponse("Enviat! :)")
             # email existent a la BBDD
             # TODO: enviar email notificacio
-            return HttpResponse("Ja has enviat un document amb aquest email en aquesta categoria.")
+            return HttpResponse("Ja has enviat un document amb aquest email en aquesta categoria. Pots escriure a mserr229@xtec.cat per solucionar-ho.")
 
     else:
         form = EnviamentForm()
