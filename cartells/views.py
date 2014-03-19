@@ -9,27 +9,9 @@ from cartells.models import *
 # opcions pel menu
 opcions = ( Cartell.__name__, Narracio.__name__, Poesia.__name__, Assaig.__name__ )
 
-class CartellForm(ModelForm):
+class EnviamentForm(ModelForm):
     class Meta:
-        model = Cartell
-        fields = ['nom','email','telefon','titol','arxiu']
-    # TODO: captcha
-
-class NarracioForm(ModelForm):
-    class Meta:
-        model = Narracio
-        fields = ['nom','email','telefon','titol','arxiu']
-    # TODO: captcha
-
-class PoesiaForm(ModelForm):
-    class Meta:
-        model = Poesia
-        fields = ['nom','email','telefon','titol','arxiu']
-    # TODO: captcha
-
-class AssaigForm(ModelForm):
-    class Meta:
-        model = Assaig
+        model = Enviament
         fields = ['nom','email','telefon','titol','arxiu']
     # TODO: captcha
 
@@ -47,21 +29,18 @@ def index(request):
     print opcio
     
     if request.method=="POST":
-        if opcio==Cartell.__name__:
+        if opcio == Cartell.__name__:
             instancia = Cartell()
-            form = CartellForm(request.POST, request.FILES, instance=instancia )
-        elif opcio==Narracio.__name__:
+        elif opcio == Narracio.__name__:
             instancia = Narracio()
-            form = NarracioForm(request.POST, request.FILES, instance=instancia )
-        elif opcio==Poesia.__name__:
+        elif opcio == Poesia.__name__:
             instancia = Poesia()
-            form = PoesiaForm(request.POST, request.FILES, instance=instancia )
-        elif opcio==Assaig.__name__:
+        elif opcio == Assaig.__name__:
             instancia = Assaig()
-            form = AssaigForm(request.POST, request.FILES, instance=instancia )
         else:
             return HttpResponse("Error en l'aplicacio: opcio invalida")
 
+        form = EnviamentForm(request.POST, request.FILES, instance=instancia )
         if form.is_valid():
             # comprovar que l'email no esta repetit
             email = form.cleaned_data["email"]
@@ -86,15 +65,6 @@ def index(request):
             return HttpResponse("Ja has enviat un document amb aquest email en aquesta categoria.")
 
     else:
-        if opcio==Cartell.__name__:
-            form = CartellForm()
-        elif opcio==Narracio.__name__:
-            form = NarracioForm()
-        elif opcio==Poesia.__name__:
-            form = PoesiaForm()
-        elif opcio==Assaig.__name__:
-            form = AssaigForm()
-        else:
-            return HttpResponse("Error en l'aplicacio: opcio invalida (3)")
+        form = EnviamentForm()
         
     return render(request,"cartells/form.html", {"form":form, "opcio":opcio, "opcions":opcions} )

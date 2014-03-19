@@ -3,4 +3,14 @@ from cartells.models import *
 
 # Register your models here.
 
-admin.site.register([Cartell,Narracio,Poesia,Assaig,Enviament])
+class EnviamentAdmin(admin.ModelAdmin):
+    list_display = ("nom","telefon","email","arxiu")
+    search_fields = ("email",)
+
+# els elements concrets mostraran nomes el codi d'arxiu
+admin.site.register(Cartell)
+admin.site.register(Narracio)
+admin.site.register(Poesia)
+admin.site.register(Assaig)
+# enviament (super-classe) mostrara dades del remitent
+admin.site.register(Enviament,EnviamentAdmin)
