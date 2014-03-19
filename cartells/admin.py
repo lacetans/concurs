@@ -3,4 +3,4 @@ from cartells.models import *
 
 # Register your models here.
 
-admin.site.register([Cartell,Narracio,Poesia,Assaig])
+admin.site.register([Cartell,Narracio,Poesia,Assaig,Enviament])

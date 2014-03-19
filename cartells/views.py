@@ -63,19 +63,27 @@ def index(request):
             return HttpResponse("Error en l'aplicacio: opcio invalida")
 
         if form.is_valid():
-            # comprovar que l'email no esta repetit?
+            # comprovar que l'email no esta repetit
             email = form.cleaned_data["email"]
             try:
-                # TODO IMPORTANT : fer checks a fons
-                c2 = Cartell.objects.get(email=email)
-            except Cartell.DoesNotExist:
+                if opcio==Cartell.__name__:
+                    c2 = Cartell.objects.get(email=email)
+                elif opcio==Narracio.__name__:
+                    c2 = Narracio.objects.get(email=email)
+                elif opcio==Poesia.__name__:
+                    c2 = Poesia.objects.get(email=email)
+                elif opcio==Assaig.__name__:
+                    c2 = Assaig.objects.get(email=email)
+                else:
+                    return HttpResponse("Error en l'aplicacio: opcio invalida (2)")
+            except:
                 # email no existeix: entrar-ho a la BBDD
                 instancia.data = datetime.now()
                 form.save()
-                return HttpResponse("Enviat!")
+                return HttpResponse("Enviat! :)")
             # email existent a la BBDD
             # TODO: enviar email notificacio
-            return HttpResponse("Ja has enviat un document amb aquest email en aquesta categoria")
+            return HttpResponse("Ja has enviat un document amb aquest email en aquesta categoria.")
 
     else:
         if opcio==Cartell.__name__:
@@ -87,6 +95,6 @@ def index(request):
         elif opcio==Assaig.__name__:
             form = AssaigForm()
         else:
-            return HttpResponse("Error en l'aplicacio: opcio invalida")
+            return HttpResponse("Error en l'aplicacio: opcio invalida (3)")
         
     return render(request,"cartells/form.html", {"form":form, "opcio":opcio, "opcions":opcions} )

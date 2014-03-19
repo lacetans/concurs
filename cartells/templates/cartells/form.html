@@ -11,16 +11,32 @@
         }
         .mainwrapper {
             display: inline-block;
-
+            position: absolute;
         }
         .header {
-            margin-bottom:0;
         }
         .dades {
+            border-collapse: true;
             background-color: rgba(200,200,200,0.5);
             border-radius:10px;
             padding: 10px;
             margin-top:0;
+        }
+        ul.nav {
+            margin-bottom: 10px;
+        }
+        ul.nav li {
+            font-family: sans;
+            text-decoration: none;
+            display: inline;
+            padding: 10px;
+            margin: 0;
+            border-top-left-radius:10px;
+            border-top-right-radius:10px;
+            background-color: rgba(200,200,200,0.15);
+        }
+        ul.nav li.actiu {
+            background-color: rgba(200,200,200,0.5);
         }
         ul.errorlist {
             color: red;
@@ -28,16 +44,6 @@
             padding:0;
             margin:0;
             font-size:0.7em;
-        }
-        ul.nav li {
-            display: inline;
-            padding: 10px;
-            margin: 0;
-        }
-        li.actiu {
-            border-top-left-radius:10px;
-            border-top-right-radius:10px;
-            background-color: rgba(200,200,200,0.5);
         }
     </style>
 </head>
