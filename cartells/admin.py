@@ -5,7 +5,7 @@ from cartells.models import *
 
 class EnviamentAdmin(admin.ModelAdmin):
     list_display = ("nom","telefon","email","titol","arxiu")
-    search_fields = ("email",)
+    search_fields = ("nom","telefon","email","titol","arxiu")
 
 # els elements concrets mostraran nomes el codi d'arxiu
 admin.site.register(Cartell,EnviamentAdmin)
