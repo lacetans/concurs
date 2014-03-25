@@ -43,7 +43,8 @@ def index(request):
         form = EnviamentForm(request.POST, request.FILES, instance=instancia )
         if form.is_valid():
             # comprovar que l'email no esta repetit
-            email = form.cleaned_data["email"]
+            # AL FINAL NO HO COMPROVEM
+            """email = form.cleaned_data["email"]
             try:
                 if opcio==Cartell.__name__:
                     c2 = Cartell.objects.get(email=email)
@@ -55,14 +56,14 @@ def index(request):
                     c2 = Assaig.objects.get(email=email)
                 else:
                     return HttpResponse("Error en l'aplicacio: opcio invalida (2)")
-            except:
-                # email no existeix: entrar-ho a la BBDD
-                instancia.data = datetime.now()
-                form.save()
-                return HttpResponse("Enviat! :)")
+            except:"""
+            # email no existeix: entrar-ho a la BBDD
+            instancia.data = datetime.now()
+            form.save()
+            return HttpResponse("Enviat! :)")
             # email existent a la BBDD
             # TODO: enviar email notificacio
-            return HttpResponse("Ja has enviat un document amb aquest email en aquesta categoria. Pots escriure a mserr229@xtec.cat per solucionar-ho.")
+            #return HttpResponse("Ja has enviat un document amb aquest email en aquesta categoria. Pots escriure a mserr229@xtec.cat per solucionar-ho.")
 
     else:
         form = EnviamentForm()
