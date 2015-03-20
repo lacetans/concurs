@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.forms import ModelForm
+from django.core.mail import EmailMessage
 
 from datetime import datetime
 
@@ -59,11 +61,32 @@ def index(request):
             except:"""
             # email no existeix: entrar-ho a la BBDD
             instancia.data = datetime.now()
-            form.save()
-            return HttpResponse("Enviat! :)")
-            # email existent a la BBDD
-            # TODO: enviar email notificacio
-            #return HttpResponse("Ja has enviat un document amb aquest email en aquesta categoria. Pots escriure a mserr229@xtec.cat per solucionar-ho.")
+            enviament = form.save()
+            subject = "Concurs Lacetània Sant Jordi"
+            body = """
+Benvolguda/ut,
+
+has efectuat una tramesa per participar al concurs Lacetània de Sant Jordi.
+Merci per particpar! :)
+
+Categoria: %s
+Codi: %s
+
+Aquest codi només és per si vols fer alguna comprovació o reclamació al jurat.
+
+Sort!
+
+Informàtica Lacetània (infla.cat)
+""" % ( opcio, enviament.arxiu )
+            email = EmailMessage( subject, body, from_email='noreply@infla.cat', to=[enviament.email] )
+            email.send(fail_silently=False)
+
+            missatge = """
+Enviat! :)<br>
+Merci per la teva participació!<br><br>
+Rebràs un email amb les dades de la teva candidatura. Sort!
+"""
+            return HttpResponse( missatge )
 
     else:
         form = EnviamentForm()
