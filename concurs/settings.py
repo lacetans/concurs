@@ -83,7 +83,7 @@ USE_TZ = True
 STATIC_URL = '/concurs/static/'
 STATIC_ROOT = 'static'
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/concurs/'
 MEDIA_ROOT = '/home/jefe/concurs/'
 
 EMAIL_HOST = 'localhost'
